@@ -16,13 +16,13 @@
         .glass-card { background: #fff; border-radius: 32px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.04); }
         .ai-input { background: #f8fafc; border: 2px solid transparent; }
         .ai-input:focus { border-color: var(--xhs-red); background: #fff; box-shadow: 0 0 0 4px rgba(255, 36, 66, 0.08); outline: none; }
-        .type-btn { border: 1px solid #edf2f7; background: #fff; }
+        .type-btn { border: 1px solid #edf2f7; background: #fff; transition: all 0.2s; }
         .type-btn.active { border-color: var(--xhs-red); background: #fff1f2; color: var(--xhs-red); font-weight: 800; transform: translateY(-1px); }
         .indicator-tag { font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 6px; }
         .tag-pro { background: #eef2ff; color: #4f46e5; }
         .tutor-bubble { background: #0f172a; color: #f1f5f9; border-radius: 24px; border-top-left-radius: 4px; }
 
-        /* Dark Mode 样式 */
+        /* Dark Mode 样式增强 */
         @media (prefers-color-scheme: dark) {
             body { background: var(--dark-bg); color: var(--dark-text); }
             .glass-card { background: var(--dark-card); border-color: rgba(255,255,255,0.1); box-shadow: none; }
@@ -33,9 +33,10 @@
             .tutor-bubble { background: #1f2937; color: #f1f5f9; border-color: rgba(255,255,255,0.1); }
             header h1 { color: var(--dark-text); }
             header p { color: #a0aec0; }
-            .tag-pro { background: #3c4a5c; color: #9f7aea; } /* Dark mode specific tag color */
-            .bg-slate-900 { background: #5a67d8; } /* 按钮在暗黑模式下变亮 */
-            .bg-slate-900:hover { background: #4c51bf; }
+            .tag-pro { background: #3c4a5c; color: #9f7aea; }
+            .bg-white { background: #2d3748 !important; }
+            .border-slate-100 { border-color: #4a5568 !important; }
+            .text-slate-600 { color: #cbd5e0 !important; }
         }
     </style>
 </head>
@@ -64,10 +65,10 @@
             <div class="lg:col-span-4 space-y-6">
                 <div class="glass-card p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-[11px] font-black text-slate-400 uppercase tracking-widest">设备加密授权端口</span>
-                        <i id="lockIcon" class="fa-solid fa-lock text-green-500"></i>
+                        <span class="text-[11px] font-black text-slate-400 uppercase tracking-widest">API 密钥鉴权端口</span>
+                        <i id="lockIcon" class="fa-solid fa-bolt text-yellow-500"></i>
                     </div>
-                    <input type="password" id="apiKey" placeholder="输入 Key 以激活设备绑定" class="w-full ai-input p-4 rounded-2xl text-xs font-mono">
+                    <input type="password" id="apiKey" placeholder="输入您的 DeepSeek API Key" class="w-full ai-input p-4 rounded-2xl text-xs font-mono">
                 </div>
 
                 <div class="glass-card p-6 flex-1">
@@ -107,11 +108,11 @@
             <div class="lg:col-span-8 flex flex-col gap-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-4">
-                        <div class="flex items-center gap-3 ml-2 italic font-black text-slate-800 text-sm">
+                        <div class="flex items-center gap-3 ml-2 italic font-black text-slate-800 dark:text-slate-100 text-sm">
                             <i class="fa-solid fa-user-tie text-indigo-500"></i> AI 私人助理
                         </div>
                         <div id="tutorMsg" class="tutor-bubble p-6 text-[11px] leading-relaxed shadow-lg">
-                            等待创作中...我将通过多维矩阵分析文案的爆发概率，并匹配最佳视觉方案。
+                            等待创作中...我将通过多维矩阵分析文案的爆发概率，并匹配最佳运营策略。
                         </div>
                     </div>
 
@@ -123,32 +124,38 @@
                                     <span class="text-slate-500" id="mTitle1">点击钩子</span>
                                     <span class="indicator-tag tag-pro" id="mTag1">---</span>
                                 </div>
-                                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div id="bar1" class="bg-red-500 h-full transition-all duration-700 w-0"></div></div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                    <div id="bar1" class="bg-red-500 h-full transition-all duration-700 w-0"></div>
+                                </div>
                             </div>
                             <div class="metric-item">
                                 <div class="flex justify-between text-[11px] font-bold mb-1">
                                     <span class="text-slate-500" id="mTitle2">搜索覆盖</span>
                                     <span class="indicator-tag tag-pro" id="mTag2">---</span>
                                 </div>
-                                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div id="bar2" class="bg-indigo-500 h-full transition-all duration-700 w-0"></div></div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                    <div id="bar2" class="bg-indigo-500 h-full transition-all duration-700 w-0"></div>
+                                </div>
                             </div>
                             <div class="metric-item">
                                 <div class="flex justify-between text-[11px] font-bold mb-1">
                                     <span class="text-slate-500" id="mTitle3">情绪共鸣</span>
                                     <span class="indicator-tag tag-pro" id="mTag3">---</span>
                                 </div>
-                                <div class="w-full bg-slate-100 h-1.5 rounded-full"><div id="bar3" class="bg-orange-500 h-full transition-all duration-700 w-0"></div></div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                    <div id="bar3" class="bg-orange-500 h-full transition-all duration-700 w-0"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-card flex-1 flex flex-col min-h-[550px] overflow-hidden border-2 border-slate-50">
-                    <div class="px-8 py-4 border-b flex justify-between items-center bg-slate-50/50">
+                <div class="glass-card flex-1 flex flex-col min-h-[550px] overflow-hidden border-2 border-slate-50 dark:border-slate-800">
+                    <div class="px-8 py-4 border-b flex justify-between items-center bg-slate-50/50 dark:bg-slate-700/50">
                         <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Master Draft</span>
                         <button onclick="copyContent()" class="text-[10px] font-bold text-red-500 uppercase hover:underline">Copy Text</button>
                     </div>
-                    <div id="output" class="p-8 flex-1 overflow-y-auto leading-relaxed text-slate-700 text-sm whitespace-pre-wrap">
+                    <div id="output" class="p-8 flex-1 overflow-y-auto leading-relaxed text-slate-700 dark:text-white text-sm whitespace-pre-wrap">
                         <div class="flex flex-col items-center justify-center h-full opacity-10">
                             <i class="fa-solid fa-wand-sparkles text-6xl mb-4"></i>
                         </div>
@@ -160,21 +167,6 @@
 
     <script>
         let currentScene = '种草文案';
-        
-        const getFingerprint = () => {
-            return navigator.userAgent + screen.width + (navigator.languages || []);
-        };
-
-        const validateLock = (key) => {
-            const fingerprint = btoa(getFingerprint());
-            const keyHash = btoa(key).substring(0, 10);
-            const storedLock = localStorage.getItem(`lock_${keyHash}`);
-            if (!storedLock) {
-                localStorage.setItem(`lock_${keyHash}`, fingerprint);
-                return true;
-            }
-            return storedLock === fingerprint;
-        };
 
         function selectScene(s, btn) {
             currentScene = s;
@@ -188,10 +180,6 @@
             const features = document.getElementById('features').value;
 
             if(!key) return alert('请输入 Key');
-            if(!validateLock(key)) {
-                document.getElementById('lockIcon').className = "fa-solid fa-circle-xmark text-red-500";
-                return alert('⚠️ 授权失败：检测到该 Key 已在其他设备绑定。请联系管理员解除或更换。');
-            }
             if(!topic) return alert('请输入主题');
 
             const output = document.getElementById('output');
@@ -199,7 +187,7 @@
             const btnText = document.getElementById('btnText');
 
             btnText.innerText = "Deep Engine 推理中...";
-            output.innerHTML = `<div class="animate-pulse text-slate-300">正在调用爆款逻辑矩阵，生成文案及配套视觉建议...</div>`;
+            output.innerHTML = `<div class="animate-pulse text-slate-400 dark:text-slate-100">正在调用爆款逻辑矩阵，生成极简爆文...</div>`;
 
             try {
                 const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
@@ -210,16 +198,12 @@
                         messages: [
                             {
                                 role: "system", 
-                                content: `你是一个深谙小红书算法的爆文专家，同时也是一位顶尖的视觉内容策略师。针对 [${currentScene}] 场景，你的创作逻辑如下：
-                                1. 文案：
-                                   - 标题必须包含【反直觉】或【强烈数字对比】，字数15-25字。
-                                   - 开篇3秒必须通过“痛点代入”或“美学暴击”抓住眼球。
-                                   - 正文拒绝流水账，必须包含至少一个【差异化卖点】，多用“救命、绝绝子、谁懂啊”等博主口癖，但不要过分。
-                                   - 结尾必须有【互动钩子】引导点赞收藏。
-                                   - 文案总字数在400-600字，排版精美。
-                                2. 视觉（图片/视频）建议：
-                                   - 根据文案内容，给出3-5条【具体且可执行】的图片或视频拍摄建议（例如：构图、色调、特写角度、拍摄元素、视频转场节奏等），确保视觉内容能最大化文案的爆款潜力。
-                                   - 视觉建议必须是独立的段落，用【视觉策略】开头。`
+                                content: `你是一个深谙小红书算法的爆文专家。针对 [${currentScene}] 场景，你的创作逻辑如下：
+                                1. 标题必须包含【反直觉】或【强烈数字对比】，字数15-25字。
+                                2. 开篇3秒必须通过“痛点代入”或“美学暴击”抓住眼球。
+                                3. 正文拒绝流水账，必须包含至少一个【差异化卖点】，多用“救命、绝绝子、谁懂啊”等博主口癖。
+                                4. 结尾必须有【互动钩子】引导点赞收藏。
+                                5. 文案总字数在400-600字，禁止输出任何视觉拍摄策略。`
                             },
                             {role: "user", content: `主题：${topic}，关键卖点：${features}`}
                         ]
@@ -227,11 +211,13 @@
                 });
 
                 const data = await response.json();
+                if (data.error) throw new Error(data.error.message);
+                
                 output.innerHTML = data.choices[0].message.content;
                 updateAnalysis(currentScene);
 
             } catch (err) {
-                output.innerHTML = "❌ 发生异常，请检查 Key 状态或网络连接。";
+                output.innerHTML = `<div class="text-red-500">❌ 错误：${err.message}。请检查 Key 或网络。</div>`;
             } finally {
                 btnText.innerText = "生成高质爆文";
             }
@@ -241,19 +227,19 @@
             const tutor = document.getElementById('tutorMsg');
             const configs = {
                 '潮流文案': { 
-                    msg: "潮流文案已注入『视觉溢价』算法。侧重『先锋感』描述。建议配图：冷色调、高对比度特写。",
+                    msg: "潮流文案已注入『视觉溢价』算法。侧重『先锋感』描述。",
                     metrics: ["视觉溢价", "受众精准度", "先锋指数"],
                     tags: ["极高", "S级", "先锋"],
                     bars: [95, 80, 98]
                 },
                 '运动文案': { 
-                    msg: "运动文案采用了『自律共鸣』逻辑。不再单纯讲健身，而是讲『生活掌控感』。建议配图：汗水细节、极简健身餐。",
+                    msg: "运动文案采用了『自律共鸣』逻辑。不再单纯讲健身，而是讲『生活掌控感』。",
                     metrics: ["掌控感", "热量消耗感", "动作专业度"],
                     tags: ["深度", "高频", "A+"],
                     bars: [88, 92, 75]
                 },
                 '种草文案': {
-                    msg: "种草文案重点在于『利益点前置』。我帮你把卖点揉进了『生活场景』，让用户觉得不买就是亏。",
+                    msg: "种草文案重点在于『利益点前置』。我帮你把卖点揉进了『生活场景』。",
                     metrics: ["购买冲动", "场景真实感", "信任背书"],
                     tags: ["极强", "高质", "优秀"],
                     bars: [96, 85, 90]
@@ -264,34 +250,16 @@
                     tags: ["硬核", "极高", "S级"],
                     bars: [98, 95, 80]
                 },
-                '日记文案': { // 新增日记文案的分析
-                    msg: "日记文案侧重『情绪真实』与『生活碎片』。避免过度营销，以真诚打动用户。这种类型更考验图文的融合度。",
+                '日记文案': {
+                    msg: "日记文案侧重『情绪真实』与『生活碎片』。避免过度营销，以真诚打动用户。",
                     metrics: ["情绪共鸣", "生活气息", "细节捕捉"],
                     tags: ["动人", "自然", "独家"],
                     bars: [90, 85, 92]
-                },
-                '获客文案': {
-                    msg: "获客文案已强化『稀缺性』与『紧迫感』。结尾引导用户加粉或私信。建议配图：清晰的活动海报或福利截图。",
-                    metrics: ["行动转化", "用户信任", "稀缺感知"],
-                    tags: ["高效", "精准", "强烈"],
-                    bars: [92, 88, 95]
-                },
-                '风景文案': {
-                    msg: "风景文案突出『极致美学』。我已强调光影和氛围感，避免普通游客照。",
-                    metrics: ["视觉冲击", "情绪氛围", "打卡价值"],
-                    tags: ["惊艳", "沉浸", "爆款"],
-                    bars: [98, 90, 85]
-                },
-                '旅游文案': {
-                    msg: "旅游文案侧重『行程体验』与『避坑指南』。强调实用性，让用户觉得『这份攻略我能用』。",
-                    metrics: ["实用价值", "避坑指数", "行程规划"],
-                    tags: ["详尽", "必备", "高效"],
-                    bars: [95, 92, 88]
                 }
             };
 
             const cfg = configs[scene] || configs['种草文案'];
-            tutor.innerHTML = `<span class="text-indigo-400 font-black">【${scene} 策略分析】</span><br>${cfg.msg}`;
+            tutor.innerHTML = `<span class="text-indigo-400 font-black">【${scene} 策略复盘】</span><br>${cfg.msg}`;
             
             for(let i=1; i<=3; i++) {
                 document.getElementById(`mTitle${i}`).innerText = cfg.metrics[i-1];
@@ -301,7 +269,8 @@
         }
 
         function copyContent() {
-            navigator.clipboard.writeText(document.getElementById('output').innerText);
+            const text = document.getElementById('output').innerText;
+            navigator.clipboard.writeText(text);
             alert('复制成功！');
         }
     </script>
